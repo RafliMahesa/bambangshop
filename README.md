@@ -65,11 +65,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
     -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -105,3 +105,15 @@ Jika hanya menggunakan model, kode akan tetap bekerja namun kompleksitas dari ko
 Sudah, sebelumnya pada mata kuliah Pemrograman Berbasis Platform *Postman* sudah pernah diperkenalkan untuk mempermudah mengirimkan http request dengan suatu data pada body ataupun parameter kepada suatu url/endpoint. *Postman* sangat membantu saya dalam memeriksa apakah suatu endpoint dapat menerima data yang saya berikan dengan baik dan apakah return data juga dikembalikan dengan baik. 
 
 #### Reflection Publisher-3
+
+1. Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+
+Pada kasus tutorial ini, Observer Pattern yang digunakan adalah *Push Model* untuk sistem notifikasi setiap proses add, delete dan publish product. Ketika terdapat proses-proses tersebut, NotificationService akan melakukan pula proses pengiriman notifikasi kepada semua subscriber yang telah berlangganan kepada *product_type* yang bersangkutan.  
+
+2. What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+
+Jika kita menggunakan metode lain yaitu pull model untuk kasus Subscriber pada tutorial ini, maka Subscriber haruslah aktif untuk meminta data kepada Publisher. Keuntungan dari hal tersebut adalah Subscriber dapat mengambil data yang relevan dengan mereka kapanpun, namun hal tersebut juga bisa menjadi kekurangan karena sistem notifikasi untuk Subscriber yang sudah berlangganan harusnya untuk sistem automasi setiap terdapat add, delete, dan publish product akan berubah menjadi Subscriber yang harus mengetahui struktur dari data yang mereka ingin agar bisa mengambil data mana yang mereka mau serta waktu pengambilannya.
+
+3. Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+
+Tanpa penggunaan multi-threading untuk proses notifikasi ini, akan sangat menghambat dikarenakan proses pengirimannya terjadi satu per satu secara berurutan. Ini akan menyebabkan lambatnya proses karena haruslah mengantri dan dapat membuat bottleneck pada sistem karena load yang cukup tinggi.
